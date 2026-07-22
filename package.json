@@ -21,7 +21,6 @@
     "motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "skills": "^1.5.19",
     "vite": "^6.2.0"
   },
   "devDependencies": {
