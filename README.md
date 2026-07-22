@@ -12,7 +12,7 @@ Permite carga de audios, aplicar efectos en tiempo real, visualizar espectros y 
 
 
 ```bash
-git clone https://github.com/1toe/barberbeats
+git clone https://github.com/1toe/barber-beats
 cd barberbeats
 ```
 
