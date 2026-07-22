@@ -14,13 +14,13 @@ export default function App() {
   const [audioFile, setAudioFile] = React.useState<File | null>(null);
 
   const [playbackRate, setPlaybackRate] = React.useState(0.85);
-  
+
   const [lowPassEnabled, setLowPassEnabled] = React.useState(true);
   const [lowPassFreq, setLowPassFreq] = React.useState(4500);
-  
+
   const [bassBoostEnabled, setBassBoostEnabled] = React.useState(true);
   const [bassBoost, setBassBoost] = React.useState(4);
-  
+
   const [reverbEnabled, setReverbEnabled] = React.useState(true);
   const [reverbMix, setReverbMix] = React.useState(0.15);
 
@@ -45,10 +45,10 @@ export default function App() {
   }, [isProcessing]);
 
   React.useEffect(() => {
-    updateParams({ 
-      playbackRate, 
-      lowPassFreq, lowPassEnabled, 
-      bassBoost, bassBoostEnabled, 
+    updateParams({
+      playbackRate,
+      lowPassFreq, lowPassEnabled,
+      bassBoost, bassBoostEnabled,
       reverbMix, reverbEnabled,
       normalizeEnabled
     });
@@ -81,7 +81,7 @@ export default function App() {
         <header className="mb-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-zinc-800 pb-6">
           <div className="space-y-1">
             <h1 className={`font-display text-3xl font-bold tracking-tight ${isHighContrast ? 'text-white' : 'text-zinc-50'}`}>
-              Sonic Sculptor
+              Barber Beater
             </h1>
             <p className={`${isHighContrast ? 'text-zinc-300' : 'text-zinc-400'} text-sm leading-relaxed`}>
               Process audio with pitch, filter, and spatial effects locally.
@@ -89,11 +89,10 @@ export default function App() {
           </div>
           <button
             onClick={() => setTheme(theme === 'deep-space' ? 'high-contrast' : 'deep-space')}
-            className={`px-3 py-2 rounded-lg text-xs font-semibold border transition-all focus:outline-none focus-visible:ring-2 ${
-              isHighContrast 
-                ? 'bg-white text-black border-white hover:bg-zinc-200 focus-visible:ring-black' 
-                : 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800 focus-visible:ring-zinc-400'
-            }`}
+            className={`px-3 py-2 rounded-lg text-xs font-semibold border transition-all focus:outline-none focus-visible:ring-2 ${isHighContrast
+              ? 'bg-white text-black border-white hover:bg-zinc-200 focus-visible:ring-black'
+              : 'bg-zinc-900 text-zinc-200 border-zinc-700 hover:bg-zinc-800 focus-visible:ring-zinc-400'
+              }`}
             aria-label="Toggle High Contrast Accessibility Mode"
           >
             {isHighContrast ? 'High Contrast Mode (On)' : 'Theme: Deep Space'}
@@ -106,22 +105,21 @@ export default function App() {
             <h2 id="source-audio-heading" className="text-sm font-medium text-zinc-300 border-b border-zinc-800 pb-2">
               Source Audio
             </h2>
-            
+
             <div className="relative group">
-              <input 
+              <input
                 id={fileInputId}
-                type="file" 
-                accept="audio/*" 
-                onChange={handleAudioChange} 
+                type="file"
+                accept="audio/*"
+                onChange={handleAudioChange}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded-lg"
                 aria-label="Upload audio file"
               />
-              <div 
-                className={`p-6 border-2 border-dashed rounded-xl flex flex-col items-center justify-center gap-3 transition-all ${
-                  audioFile 
-                    ? 'border-zinc-500 bg-zinc-800/50' 
-                    : 'border-zinc-800 bg-zinc-900/50 group-hover:border-zinc-600 group-hover:bg-zinc-800'
-                }`}
+              <div
+                className={`p-6 border-2 border-dashed rounded-xl flex flex-col items-center justify-center gap-3 transition-all ${audioFile
+                  ? 'border-zinc-500 bg-zinc-800/50'
+                  : 'border-zinc-800 bg-zinc-900/50 group-hover:border-zinc-600 group-hover:bg-zinc-800'
+                  }`}
                 aria-hidden="true"
               >
                 <div className={`p-3 rounded-full ${audioFile ? 'bg-zinc-700' : 'bg-zinc-800'}`}>
@@ -141,7 +139,7 @@ export default function App() {
                 </div>
               </div>
             </div>
-            
+
             <WaveformDisplay file={audioFile} audioElement={audioElement} />
           </section>
 
@@ -156,18 +154,17 @@ export default function App() {
                   <SpectrumAnalyzer getAnalyser={getAnalyser} isPlaying={isPlaying} />
                 </div>
               </div>
-              
-              <button 
-                onClick={togglePlay} 
+
+              <button
+                onClick={togglePlay}
                 disabled={!audioFile}
                 aria-label={isPlaying ? 'Pause preview' : 'Play preview'}
-                className={`text-sm font-medium px-4 py-1.5 rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${
-                  !audioFile 
-                    ? 'bg-zinc-900 text-zinc-600 cursor-not-allowed border border-zinc-800' 
-                    : isPlaying 
-                      ? 'bg-zinc-100 text-zinc-900 hover:bg-white' 
-                      : 'bg-zinc-800 text-zinc-200 hover:bg-zinc-700'
-                }`}
+                className={`text-sm font-medium px-4 py-1.5 rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${!audioFile
+                  ? 'bg-zinc-900 text-zinc-600 cursor-not-allowed border border-zinc-800'
+                  : isPlaying
+                    ? 'bg-zinc-100 text-zinc-900 hover:bg-white'
+                    : 'bg-zinc-800 text-zinc-200 hover:bg-zinc-700'
+                  }`}
               >
                 {isPlaying ? 'Pause' : 'Preview'}
               </button>
@@ -178,49 +175,49 @@ export default function App() {
               <div className="space-y-3">
                 <h3 className="text-sm font-medium text-zinc-300">Barber Beats Presets</h3>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.85, 4000, 4, 0.15)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     Haircut Lounge
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.75, 2500, 6, 0.25)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     Late Night
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.80, 6000, 2, 0.35)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     Vapor Drip
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.90, 8000, 2, 0.10)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     Clean Cut
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.65, 1500, 8, 0.40)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     Macroblank
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.85, 3000, 3, 0.60)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     80s Mall
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.70, 2000, 5, 0.30)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
                     VHS Dream
                   </button>
-                  <button 
+                  <button
                     onClick={() => applyPreset(0.60, 1000, 7, 0.50)}
                     className="px-3 py-2 bg-zinc-900 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-300 transition-colors text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                   >
@@ -235,10 +232,10 @@ export default function App() {
                   <label htmlFor={playbackId} className="text-zinc-300 font-medium">Tempo & Pitch</label>
                   <span className="text-zinc-400 font-mono" aria-hidden="true">{playbackRate.toFixed(2)}x</span>
                 </div>
-                <input 
+                <input
                   id={playbackId}
-                  type="range" min="0.5" max="1.5" step="0.01" 
-                  value={playbackRate} onChange={(e) => setPlaybackRate(parseFloat(e.target.value))} 
+                  type="range" min="0.5" max="1.5" step="0.01"
+                  value={playbackRate} onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
                   className="w-full"
                   aria-valuetext={`${playbackRate.toFixed(2)} times normal speed`}
                 />
@@ -248,10 +245,10 @@ export default function App() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <label className="text-zinc-300 font-medium flex items-center gap-3 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={lowPassEnabled} 
-                      onChange={e => setLowPassEnabled(e.target.checked)} 
+                    <input
+                      type="checkbox"
+                      checked={lowPassEnabled}
+                      onChange={e => setLowPassEnabled(e.target.checked)}
                       className="accent-zinc-400 w-4 h-4 rounded border-zinc-800 bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 cursor-pointer"
                       aria-label="Enable Low-Pass Filter"
                     />
@@ -259,9 +256,9 @@ export default function App() {
                   </label>
                   <span className={`font-mono transition-opacity ${lowPassEnabled ? 'text-zinc-400' : 'text-zinc-600'}`} aria-hidden="true">{lowPassFreq} Hz</span>
                 </div>
-                <input 
+                <input
                   id={lowPassId}
-                  type="range" min="500" max="20000" step="100" 
+                  type="range" min="500" max="20000" step="100"
                   value={lowPassFreq} onChange={(e) => setLowPassFreq(parseFloat(e.target.value))}
                   disabled={!lowPassEnabled}
                   className={`w-full transition-opacity ${!lowPassEnabled ? 'opacity-30 cursor-not-allowed' : ''}`}
@@ -274,10 +271,10 @@ export default function App() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <label className="text-zinc-300 font-medium flex items-center gap-3 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={bassBoostEnabled} 
-                      onChange={e => setBassBoostEnabled(e.target.checked)} 
+                    <input
+                      type="checkbox"
+                      checked={bassBoostEnabled}
+                      onChange={e => setBassBoostEnabled(e.target.checked)}
                       className="accent-zinc-400 w-4 h-4 rounded border-zinc-800 bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 cursor-pointer"
                       aria-label="Enable Bass Boost"
                     />
@@ -285,10 +282,10 @@ export default function App() {
                   </label>
                   <span className={`font-mono transition-opacity ${bassBoostEnabled ? 'text-zinc-400' : 'text-zinc-600'}`} aria-hidden="true">+{bassBoost} dB</span>
                 </div>
-                <input 
+                <input
                   id={bassId}
-                  type="range" min="0" max="15" step="1" 
-                  value={bassBoost} onChange={(e) => setBassBoost(parseFloat(e.target.value))} 
+                  type="range" min="0" max="15" step="1"
+                  value={bassBoost} onChange={(e) => setBassBoost(parseFloat(e.target.value))}
                   disabled={!bassBoostEnabled}
                   className={`w-full transition-opacity ${!bassBoostEnabled ? 'opacity-30 cursor-not-allowed' : ''}`}
                   aria-label="Bass boost gain"
@@ -300,10 +297,10 @@ export default function App() {
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <label className="text-zinc-300 font-medium flex items-center gap-3 cursor-pointer">
-                    <input 
-                      type="checkbox" 
-                      checked={reverbEnabled} 
-                      onChange={e => setReverbEnabled(e.target.checked)} 
+                    <input
+                      type="checkbox"
+                      checked={reverbEnabled}
+                      onChange={e => setReverbEnabled(e.target.checked)}
                       className="accent-zinc-400 w-4 h-4 rounded border-zinc-800 bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 cursor-pointer"
                       aria-label="Enable Reverb"
                     />
@@ -311,10 +308,10 @@ export default function App() {
                   </label>
                   <span className={`font-mono transition-opacity ${reverbEnabled ? 'text-zinc-400' : 'text-zinc-600'}`} aria-hidden="true">{(reverbMix * 100).toFixed(0)}%</span>
                 </div>
-                <input 
+                <input
                   id={reverbId}
-                  type="range" min="0" max="1" step="0.01" 
-                  value={reverbMix} onChange={(e) => setReverbMix(parseFloat(e.target.value))} 
+                  type="range" min="0" max="1" step="0.01"
+                  value={reverbMix} onChange={(e) => setReverbMix(parseFloat(e.target.value))}
                   disabled={!reverbEnabled}
                   className={`w-full transition-opacity ${!reverbEnabled ? 'opacity-30 cursor-not-allowed' : ''}`}
                   aria-label="Reverb mix percentage"
@@ -325,10 +322,10 @@ export default function App() {
               {/* Normalize Audio */}
               <div className="pt-2">
                 <label className="text-zinc-300 font-medium flex items-center gap-3 cursor-pointer text-sm">
-                  <input 
-                    type="checkbox" 
-                    checked={normalizeEnabled} 
-                    onChange={e => setNormalizeEnabled(e.target.checked)} 
+                  <input
+                    type="checkbox"
+                    checked={normalizeEnabled}
+                    onChange={e => setNormalizeEnabled(e.target.checked)}
                     className="accent-zinc-400 w-4 h-4 rounded border-zinc-800 bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 cursor-pointer"
                     aria-label="Enable Audio Normalization"
                   />
@@ -343,7 +340,7 @@ export default function App() {
 
           {/* Export */}
           <section className="pt-6 border-t border-zinc-800" aria-label="Export">
-            <button 
+            <button
               onClick={() => exportAudio({ audioFile, playbackRate, lowPassFreq, lowPassEnabled, bassBoost, bassBoostEnabled, reverbMix, reverbEnabled, normalizeEnabled })}
               disabled={!audioFile || isProcessing}
               className="w-full bg-zinc-100 hover:bg-white disabled:bg-zinc-900 disabled:text-zinc-600 disabled:border-zinc-800 disabled:border disabled:opacity-100 disabled:cursor-not-allowed text-zinc-950 text-sm font-semibold py-3.5 px-4 rounded-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 flex justify-center items-center gap-2"
@@ -351,7 +348,7 @@ export default function App() {
             >
               {isProcessing ? 'Processing Audio...' : 'Export Processed Audio'}
             </button>
-            
+
             {/* Processing State */}
             {isProcessing && (
               <div className="mt-6 space-y-3" role="status" aria-live="polite">
@@ -360,7 +357,7 @@ export default function App() {
                   <span className="font-mono">{progress}%</span>
                 </div>
                 <div className="h-1.5 w-full bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
-                  <div 
+                  <div
                     className="h-full bg-zinc-300 transition-all duration-200 ease-linear rounded-full"
                     style={{ width: `${progress}%` }}
                     role="progressbar"
@@ -369,7 +366,7 @@ export default function App() {
                     aria-valuemax={100}
                   />
                 </div>
-                <div 
+                <div
                   className="font-mono text-[11px] text-zinc-500 leading-relaxed space-y-1 max-h-32 overflow-y-auto bg-zinc-900/50 p-3 rounded-lg border border-zinc-800/50"
                   aria-label="Processing logs"
                 >
